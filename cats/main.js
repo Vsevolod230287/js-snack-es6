@@ -112,7 +112,14 @@ femine.forEach((item, i) => {
 });
 
 nuovoFemine.forEach((item, i) => {
-  $('.nuovo-femine ul').append(`<li> Nome: ${item.nome}, colore: ${item.colore}, opacità: ${item.opacità}`)
+  $('.nuovo-femine ul').append(`<li> Nome: ${item.nome}, colore: ${item.colore}, opacità: ${item.opacità}<i class="fas fa-ribbon"></i>`)
+  $('.nuovo-femine ul li i').css('color', 'pink');
+  if (item.opacità == 0.5) { // se faccio anche  nel esle la selezione jquery allora tutte i fiocchi diventano della stessa opacità, strano
+    $('.nuovo-femine ul li i').css('opacity', '0.5');
+    item.opacità = 0.5;
+  } else {
+    item.opacità = 1;
+  }
 });
 
 
@@ -121,11 +128,13 @@ const nuovoMaschi = [];
 maschi.forEach((item, i) => {
   const {
     nome,
+    eta,
     colore,
     opacità
   } = item;
   let obj = {
     nome,
+    eta,
     colore,
     opacità
   }
@@ -133,15 +142,24 @@ maschi.forEach((item, i) => {
 });
 
 nuovoMaschi.forEach((item, i) => {
-  $('.nuovo-maschi ul').append(`<li> Nome: ${item.nome}, colore: ${item.colore}, opacità: ${item.opacità}`)
+  $('.nuovo-maschi ul').append(`<li> Nome: ${item.nome}, colore: ${item.colore}, opacità: ${item.opacità}<i class="fas fa-ribbon"></i>`)
+  $('.nuovo-maschi ul li i').css("color", "blue");
+
+  if (item.opacità == 0.5) {
+    $('.nuovo-maschi ul li i').css("opacity", "0.5");
+    item.opacità = 0.5;
+  } else {
+    item.opacità = 1;
+  }
 });
 
 const gattini =  [...nuovoFemine, ...nuovoMaschi]
 
 gattini.forEach((item, i) => {
-  
+
   for (let key in item) {
-    $('.gattini ul').append(`<li>${item[key]}</li>`);
-  }
+    $('.gattini ul').append(`<li> ${key}: ${item[key]}`);
+
+}
   $('.gattini ul').append("</br>");
 });
