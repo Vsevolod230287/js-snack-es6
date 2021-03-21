@@ -31,45 +31,94 @@ const cats = [{
   eta: 8,
   colore: 'nero',
   sesso: 'Maschio'
+}, {
+  nome: 'Lucy',
+  eta: 8,
+  colore: 'grigio',
+  sesso: 'Femina'
 }]
 
-// Milestone 1
-// cats.forEach((item, i) => {
- // console.log(`${item.nome} ha il colore ${item.colore}`);
-// });
-
-// -------------------------------------------------------------
-// Milestone 2
-// Dividere i gatti in due contenitori distinti in base al sesso e
-// aggiungere a fianco di ogni gattino un fiocco colorato di rosa, se femmina,
-// o di blu, se maschio. Il colore del fiocco deve essere più tenue se il gatto è più giovane,
-// più scuro se il gatto è più vecchio.
-
-
+// divido per sesso:
 const maschi = cats.filter((item) => {
   return item.sesso === 'Maschio'
 })
 
-
+//
+// appendo il fiocco blu e gestisco l'opacità
+//ppendo il fiocco blu e gestisco l'opacità:
 maschi.forEach((item, i) => {
-   $('ul.maschi').append(`<li>Il gatto ${item.nome} ha ${item.eta} anni ed è  di colore ${item.colore}<i class="fas fa-ribbon"></i></li>`);
-   //$('ul.maschi li').append(`<i class="fas fa-ribbon"></i>`); se la metto qua mi stampa due fiocchi al primo gatto
-   $('ul.maschi li i').css("color","blue");
+  $('ul.maschi').append(`<li>Il gatto ${item.nome} ha ${item.eta} anni ed è  di colore ${item.colore}<i class="fas fa-ribbon"></i></li>`);
+  //$('ul.maschi li').append(`<i class="fas fa-ribbon"></i>`); se la metto qua mi stampa due fiocchi al primo gatto
+  $('ul.maschi li i').css("color", "blue");
 
-   if(item.eta <= 5){
-     $('ul.maschi li i').css("opacity","0.3");
-   } 
+  if (item.eta <= 5) {
+    $('ul.maschi li i').css("opacity", "0.5");
+    item.opacità = 0.5;
+  } else if (item.eta > 5) {
+    item.opacità = 1;
+  }
 });
-
 console.log(maschi);
 
+// divido per sesso:
 const femine = cats.filter((item) => {
   return item.sesso === 'Femina'
 })
 
+// appendo il fiocco rosa e gestisco l'opacità, aggiungo anche la proprieta opacità:
 femine.forEach((item, i) => {
   $('ul.femine').append(`<li>La gatta ${item.nome} ha ${item.eta} anni ed è  di colore ${item.colore}<i class="fas fa-ribbon"></i></li>`);
+  $('ul.femine li i').css('color', 'pink');
+  if (item.eta <= 5) { // se faccio if else allora non entra nel ciclo
+    $('ul.femine li i').css('opacity', '0.5');
+    item.opacità = 0.5;
+  } else {
+    item.opacità = 1;
+  }
+});
+console.log(femine);
+
+// Milestone 3
+// Creare un nuovo array con prima tutti i gattini femmina e poi tutti i gattini maschio,
+// inserendo solamente nome e colore e colore e opacità del fiocco per ogni gatto.
+
+
+const nuovoFemine = [];
+
+femine.forEach((item, i) => {
+  const {
+    nome,
+    colore,
+    opacità
+  } = item;
+  let obj = {
+    nome,
+    colore,
+    opacità
+  }
+  nuovoFemine.push(obj);
+});
+console.log(nuovoFemine);
+
+
+const nuovoMaschi = [];
+
+maschi.forEach((item, i) => {
+  const {
+    nome,
+    colore,
+    opacità
+  } = item;
+  let obj = {
+    nome,
+    colore,
+    opacità
+  }
+  nuovoMaschi.push(obj);
 });
 
+console.log(nuovoMaschi);
 
-console.log(femine);
+const gattini =  [...nuovoFemine, ...nuovoMaschi]
+
+console.log(gattini);
