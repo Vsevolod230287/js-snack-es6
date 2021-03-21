@@ -38,6 +38,18 @@ const cats = [{
   sesso: 'Femina'
 }]
 
+cats.forEach((item, i) => {
+  const {
+    nome,
+    eta,
+    colore,
+    sesso
+  } = item;
+   $('.array-oggetti-cats').append(`<div>Nome:${nome}, eta:${eta}, colore:${colore}, genere:${sesso}</div>`)
+});
+
+
+
 // divido per sesso:
 const maschi = cats.filter((item) => {
   return item.sesso === 'Maschio'
@@ -69,7 +81,7 @@ const femine = cats.filter((item) => {
 femine.forEach((item, i) => {
   $('ul.femine').append(`<li>La gatta ${item.nome} ha ${item.eta} anni ed è  di colore ${item.colore}<i class="fas fa-ribbon"></i></li>`);
   $('ul.femine li i').css('color', 'pink');
-  if (item.eta <= 5) { // se faccio if else allora non entra nel ciclo
+  if (item.eta <= 5) { // se faccio anche  nel esle la selezione jquery allora tutte i fiocchi diventano della stessa opacità, strano
     $('ul.femine li i').css('opacity', '0.5');
     item.opacità = 0.5;
   } else {
@@ -98,7 +110,10 @@ femine.forEach((item, i) => {
   }
   nuovoFemine.push(obj);
 });
-console.log(nuovoFemine);
+
+nuovoFemine.forEach((item, i) => {
+  $('.nuovo-femine ul').append(`<li> Nome: ${item.nome}, colore: ${item.colore}, opacità: ${item.opacità}`)
+});
 
 
 const nuovoMaschi = [];
@@ -117,8 +132,16 @@ maschi.forEach((item, i) => {
   nuovoMaschi.push(obj);
 });
 
-console.log(nuovoMaschi);
+nuovoMaschi.forEach((item, i) => {
+  $('.nuovo-maschi ul').append(`<li> Nome: ${item.nome}, colore: ${item.colore}, opacità: ${item.opacità}`)
+});
 
 const gattini =  [...nuovoFemine, ...nuovoMaschi]
 
-console.log(gattini);
+gattini.forEach((item, i) => {
+  
+  for (let key in item) {
+    $('.gattini ul').append(`<li>${item[key]}</li>`);
+  }
+  $('.gattini ul').append("</br>");
+});
